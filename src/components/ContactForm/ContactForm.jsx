@@ -1,50 +1,57 @@
-import { Component } from "react";
+import { useState } from "react";
 import PropTypes from 'prop-types';
 import css from './ContactForm.module.css'
 
-export class ContactForm extends Component {
-  static propTypes = {
-    contacts: PropTypes.arrayOf(
-      PropTypes.shape(PropTypes.string.isRequired).isRequired
-    ).isRequired,
-    onFormSubmit: PropTypes.func.isRequired,
+export function ContactForm({onFormSubmit, contacts}) {
+  const [name, setName] = useState('');
+  const [number, setNumber] = useState('');
+
+
+  const handleInputChange = event => {
+
+    switch (event.currentTarget.name) {
+
+      case 'name':
+        setName(event.currentTarget.value);
+        break;
+      
+      case 'number':
+        setNumber(event.currentTarget.value);
+        break;
+      
+      // default: '';
+    }
+
+
+    
+      
   };
 
-  state = {
-    name: '',
-    number: '',
-  };
-
-  handleInputChange = event => {
-    this.setState({
-      [event.currentTarget.name]: event.currentTarget.value,
-    });
-  };
-
-  handleFormSubmit = event => {
+  const handleFormSubmit = event => {
     event.preventDefault();
-    const identicalContact = this.props.contacts.some(
-      contact => contact.name === this.state.name
+    const identicalContact = contacts.some(
+      contact => contact.name === name
     );
 
     identicalContact
-      ? alert(`${this.state.name} is already in contacts`)
-      : this.onNoIdenticalContact();
+      ? alert(`${name} is already in contacts`)
+      : onNoIdenticalContact();
   };
 
-  onNoIdenticalContact() {
+  function onNoIdenticalContact() {
     
-    this.props.onFormSubmit(this.state);
-    this.reset();
+    onFormSubmit({name, number});
+    reset();
   }
 
-  reset = () => {
-    this.setState({ name: '', number: '' });
+  const reset = () => {
+    setName('');
+    setNumber('');
   };
 
-  render() {
+ 
     return (
-      <form className={css.contactForm} onSubmit={this.handleFormSubmit}>
+      <form className={css.contactForm} onSubmit={handleFormSubmit}>
         <label>
           Name <br />
           <input
@@ -53,8 +60,8 @@ export class ContactForm extends Component {
             pattern="^[a-zA-Zа-яА-Я]+(([' -][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$"
             title="Name may contain only letters, apostrophe, dash and spaces. For example Adrian, Jacob Mercer, Charles de Batz de Castelmore d'Artagnan"
             required
-            value={this.state.name}
-            onChange={this.handleInputChange}
+            value={name}
+            onChange={handleInputChange}
           />
         </label>
 
@@ -66,8 +73,8 @@ export class ContactForm extends Component {
             pattern="\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}"
             title="Phone number must be digits and can contain spaces, dashes, parentheses and can start with +"
             required
-            value={this.state.number}
-            onChange={this.handleInputChange}
+            value={number}
+            onChange={handleInputChange}
           />
         </label>
 
@@ -75,4 +82,10 @@ export class ContactForm extends Component {
       </form>
     );
   }
-}
+
+
+ContactForm.propTypes = {
+    contacts: PropTypes.arrayOf(
+      PropTypes.shape(PropTypes.string.isRequired).isRequired).isRequired,
+    onFormSubmit: PropTypes.func.isRequired,
+  };
