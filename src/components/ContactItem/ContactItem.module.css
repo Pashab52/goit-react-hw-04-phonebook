@@ -1,0 +1,24 @@
+.contactItem{
+
+    
+    
+}
+
+
+li {
+    text-align: center;
+    display: flex;
+    width: 260px;
+    justify-content: space-between;
+    
+    
+    
+}
+
+ul {
+    display: flex;
+    gap: 5px;
+    flex-direction: column;
+
+
+}
