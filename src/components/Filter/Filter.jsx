@@ -16,8 +16,7 @@ export function Filter(props) {
             onChange={event => props.onFilterChange(event.currentTarget.value)}
           />
         </label>
-        {/* <button type="submit">sdfsf</button> */}
-      </div>
+             </div>
     );
   }
 

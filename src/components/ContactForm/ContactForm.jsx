@@ -2,10 +2,10 @@ import { useState } from "react";
 import PropTypes from 'prop-types';
 import css from './ContactForm.module.css'
 
-export function ContactForm({onFormSubmit, contacts}) {
+export function ContactForm({ onFormSubmit, contacts }) {
+  
   const [name, setName] = useState('');
   const [number, setNumber] = useState('');
-
 
   const handleInputChange = event => {
 
@@ -19,12 +19,9 @@ export function ContactForm({onFormSubmit, contacts}) {
         setNumber(event.currentTarget.value);
         break;
       
-      // default: '';
-    }
-
-
-    
-      
+      default:
+        console.warn('error');
+        }  
   };
 
   const handleFormSubmit = event => {
@@ -40,7 +37,8 @@ export function ContactForm({onFormSubmit, contacts}) {
 
   function onNoIdenticalContact() {
     
-    onFormSubmit({name, number});
+    onFormSubmit({ name, number });
+ 
     reset();
   }
 
