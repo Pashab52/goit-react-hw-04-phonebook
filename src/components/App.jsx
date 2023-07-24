@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef} from "react";
+import { useState, useEffect,useLayoutEffect, useRef} from "react";
 import { ContactForm } from "./ContactForm/ContactForm";
 import { ContactList } from "./ContactList/ContactList";
 import { Filter } from "./Filter/Filter";
@@ -19,23 +19,19 @@ export function App() {
   const firstRender = useRef(true)
 
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     try {
-
       const contactsJSON = localStorage.getItem('contacts');
 
       if (contactsJSON) {
         const localContacts = JSON.parse(contactsJSON);
-  
-          // console.log('запис з ЛХ у стейт')
-          setContacts(localContacts);
-        
-      }
-    }
-      catch (error) {
-          console.log(error);
-        }
 
+        // console.log('запис з ЛХ у стейт')
+        setContacts(localContacts);
+      }
+    } catch (error) {
+      console.log(error);
+    }
   }, []);
 
   useEffect(() => {
