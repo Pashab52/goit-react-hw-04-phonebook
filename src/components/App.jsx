@@ -75,7 +75,7 @@ export function App() {
 
   return (
     <div className={css.phoneContainer}>
-      <h1>Phonebook</h1>
+      <h1 className={css.title}>Phonebook</h1>
       <ContactForm onFormSubmit={onFormSubmit} contacts={contacts} />
 
       <Filter onFilterChange={onFilterChange} value={filter} />

@@ -10,8 +10,13 @@
     justify-content: center;
     align-items: center;
     color: #010101;
-    
     border-radius: 20px;
     padding: 30px;
     box-shadow: 0 8px 26px rgba(0, 0, 0, 0.4), 0 28px 30px rgba(0, 0, 0, 0.3);
+}
+
+.title{
+    font-weight: 900;
+    font-size: 28px;
+    margin-bottom: 5px;
 }
